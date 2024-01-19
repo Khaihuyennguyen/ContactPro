@@ -19,7 +19,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\" />
+    <Folder Include="img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\img\ClaudiaBlack.png" />
+    <None Include="wwwroot\img\ContactPro.png" />
+    <None Include="wwwroot\img\contactProLanding.png" />
+    <None Include="wwwroot\img\ContactProLight.png" />
+    <None Include="wwwroot\img\CourtenayTaylor.png" />
+    <None Include="wwwroot\img\DefaultContactImage.png" />
+    <None Include="wwwroot\img\FrankLangella.png" />
+    <None Include="wwwroot\img\GinaTorres.png" />
+    <None Include="wwwroot\img\LanceReddick.png" />
+    <None Include="wwwroot\img\MoiraQuirk.png" />
+    <None Include="wwwroot\img\NathanFillion.png" />
+    <None Include="wwwroot\img\NeilKaplan.png" />
+    <None Include="wwwroot\img\NolanNorth.png" />
+    <None Include="wwwroot\img\oops.png" />
+    <None Include="wwwroot\img\PageLeong.png" />
+    <None Include="wwwroot\img\ProfilePicPt.png" />
+    <None Include="wwwroot\img\ProfilePicSQ.png" />
+    <None Include="wwwroot\img\ProfilePicWS.png" />
   </ItemGroup>
 
 </Project>
