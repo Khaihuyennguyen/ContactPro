@@ -2,7 +2,7 @@
 using ContactPro.Models;
 using Microsoft.EntityFrameworkCore;
 using ContactPro.Services.Interfaces;
-using SQLitePCL;
+
 
 namespace ContactPro.Services
 {

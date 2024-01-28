@@ -86,6 +86,7 @@ namespace ContactPro.Controllers
                 contact.Created = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
 
                 if (contact.BirthDate != null)
+                if (contact.BirthDate != null)
                 {
                     contact.BirthDate = DateTime.SpecifyKind(contact.BirthDate.Value, DateTimeKind.Utc);
 
