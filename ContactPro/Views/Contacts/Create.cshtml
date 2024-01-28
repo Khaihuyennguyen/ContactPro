@@ -14,7 +14,7 @@
 					<img class="square-img" src="~/img/DefaultContactImage.png">
 				</div>
 				<div>
-					<label asp-for="ImageFile" class="control-label"></label>
+					
 					<input asp-for="ImageFile" class="form-control" accept=".png,.jpg,.jpeg,.gif">
 					<span asp-validation-for="ImageFile" class="text-danger"></span>
 				</div>
@@ -69,7 +69,7 @@
 					<div class="col-12 col-lg-6 mt-3">
 						<label asp-for="Categories" class="control-label"></label>
 						<select name="CategoryList" class="form-control" asp-items="ViewBag.CategoryList" multiple></select>
-					</div>"
+					</div>
 					<div class="col-12 col-lg-6 mt-3">
 						<label asp-for="BirthDate" class="control-label"></label>
 						<input asp-for="BirthDate" class="form-control" />
