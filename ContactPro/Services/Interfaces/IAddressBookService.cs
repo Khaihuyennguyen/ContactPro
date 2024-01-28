@@ -11,6 +11,6 @@ namespace ContactPro.Services.Interfaces
 		Task<ICollection<Category>> GetContactCategoriesAsync(int  contactId);
 		Task RemoveContactFromCategoryAsync(int categoryId, int contactId);
 
-		IEnumerable<Contact> SearchForContacts(string searchString, string UserId);
+		IEnumerable<Contact> SearchForContacts(string searchString, string userId);
 	}
 }
