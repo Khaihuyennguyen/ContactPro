@@ -35,7 +35,7 @@ namespace ContactPro.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Contact.Include(c => c.AppUser);
+            var applicationDbContext = _context.Contacts.Include(c => c.AppUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -43,12 +43,12 @@ namespace ContactPro.Controllers
         [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Contact == null)
+            if (id == null || _context.Contacts == null)
             {
                 return NotFound();
             }
 
-            var contact = await _context.Contact
+            var contact = await _context.Contacts
                 .Include(c => c.AppUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (contact == null)
@@ -118,12 +118,12 @@ namespace ContactPro.Controllers
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Contact == null)
+            if (id == null || _context.Contacts == null)
             {
                 return NotFound();
             }
 
-            var contact = await _context.Contact.FindAsync(id);
+            var contact = await _context.Contacts.FindAsync(id);
             if (contact == null)
             {
                 return NotFound();
@@ -172,12 +172,12 @@ namespace ContactPro.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Contact == null)
+            if (id == null || _context.Contacts == null)
             {
                 return NotFound();
             }
 
-            var contact = await _context.Contact
+            var contact = await _context.Contacts
                 .Include(c => c.AppUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (contact == null)
@@ -193,14 +193,14 @@ namespace ContactPro.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Contact == null)
+            if (_context.Contacts == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Contact'  is null.");
             }
-            var contact = await _context.Contact.FindAsync(id);
+            var contact = await _context.Contacts.FindAsync(id);
             if (contact != null)
             {
-                _context.Contact.Remove(contact);
+                _context.Contacts.Remove(contact);
             }
             
             await _context.SaveChangesAsync();
@@ -209,7 +209,7 @@ namespace ContactPro.Controllers
 
         private bool ContactExists(int id)
         {
-          return (_context.Contact?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Contacts?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

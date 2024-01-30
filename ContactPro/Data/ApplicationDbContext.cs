@@ -6,14 +6,14 @@ namespace ContactPro.Data
 {
     public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
-		internal readonly object Contacts;
+		//internal readonly object Contacts;
 
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<Contact> Contact { get; set; } = default!;
+        public virtual DbSet<Contact> Contacts { get; set; } = default!;
         public virtual DbSet<Category> Categories { get; set; } = default!;
     }
 }
