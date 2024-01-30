@@ -5,6 +5,8 @@ namespace ContactPro.Models
 {
     public class AppUser : IdentityUser
     {
+        public virtual ICollection<Contact> Contacts { get; set; } = new HashSet<Contact>();
+        public virtual ICollection<Category> Categories { get; set; } = new HashSet<Category>();
         [Required]
         [Display(Name = "First Name")]
         [StringLength(50,ErrorMessage ="The {0} must be at least {2} and a max {1} characters long", MinimumLength = 2)]
