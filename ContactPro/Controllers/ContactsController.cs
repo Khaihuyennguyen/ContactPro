@@ -90,7 +90,7 @@ namespace ContactPro.Controllers
                     .ToList();
             }
             ViewData["CategoryId"] = new SelectList(appUser.Categories, "Id", "Name", 0);
-
+            
             return View(nameof(Index), contacts);
         }
         // GET: Contacts/Details/5
