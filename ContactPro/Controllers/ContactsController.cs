@@ -39,8 +39,10 @@ namespace ContactPro.Controllers
 
         // GET: Contacts
         [Authorize]
-        public IActionResult Index(int categoryId)
+        public IActionResult Index(int categoryId, string swalMessage=null)
         {
+            ViewData["SwalMessage"] = swalMessage;
+
             var contacts = new List<Contact>();
             string appUserId = _userManager.GetUserId(User);
             //return the User ID and associated contacts and categories;
@@ -155,9 +157,10 @@ namespace ContactPro.Controllers
                 try
                 {
                     await _emailService.SendEmailAsync(ecvm.EmailData.EmailAddress, ecvm.EmailData.Subject, ecvm.EmailData.Body);
-                    return RedirectToAction("Index", "Contacts");
+                    return RedirectToAction("Index", "Contacts", new {swalMessage = "Success: Email Sent!"});
                 }
                 catch {
+                    return RedirectToAction("Index", "Contacts", new { swalMessage = "Error: Email Send Failed!" });
                     throw;
                 }
             }
