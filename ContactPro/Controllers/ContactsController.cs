@@ -14,6 +14,7 @@ using ContactPro.Models.ViewModels;
 using ContactPro.Services.Interfaces;
 using ContactPro.Services;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 
 
@@ -25,13 +26,15 @@ namespace ContactPro.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IImageService _imageService;
         private readonly IAddressBookService _addressBookService;
+        private readonly IEmailSender _emailService;
         
-        public ContactsController(ApplicationDbContext context, UserManager<AppUser> userManager,IImageService imageService, IAddressBookService addressBookService )
+        public ContactsController(ApplicationDbContext context, UserManager<AppUser> userManager,IImageService imageService, IAddressBookService addressBookService, IEmailSender emailService )
         {
             _context = context;
             _userManager = userManager;
             _imageService = imageService;
             _addressBookService = addressBookService;
+            _emailService = emailService;
         }
 
         // GET: Contacts
@@ -142,6 +145,23 @@ namespace ContactPro.Controllers
                 EmailData = emailData
             };
             return View(model);
+        }
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> EmailContact(EmailContactViewModel ecvm)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _emailService.SendEmailAsync(ecvm.EmailData.EmailAddress, ecvm.EmailData.Subject, ecvm.EmailData.Body);
+                    return RedirectToAction("Index", "Contacts");
+                }
+                catch {
+                    throw;
+                }
+            }
+            return View(ecvm);
         }
         public async Task<IActionResult> Create()
         {
