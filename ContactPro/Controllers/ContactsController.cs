@@ -123,7 +123,7 @@ namespace ContactPro.Controllers
         public async Task<IActionResult> EmailContact(int id)
         {
             string appUserId = _userManager.GetUserId(User);
-            Contact contact = await _context.Contacts.Where(c => c.Id == d && c.AppUserID == appUserId)
+            Contact contact = await _context.Contacts.Where(c => c.Id == id && c.AppUserID == appUserId)
                                                      .FirstOrDefaultAsync();
             if (contact == null)
             {
