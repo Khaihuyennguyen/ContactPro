@@ -10,8 +10,11 @@ using ContactPro.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using ContactPro.Enums;
+using ContactPro.Models.ViewModels;
 using ContactPro.Services.Interfaces;
 using ContactPro.Services;
+using System.ComponentModel.DataAnnotations;
+
 
 
 namespace ContactPro.Controllers
@@ -93,6 +96,8 @@ namespace ContactPro.Controllers
             
             return View(nameof(Index), contacts);
         }
+
+        [Authorize]
         // GET: Contacts/Details/5
         [Authorize]
         public async Task<IActionResult> Details(int? id)
@@ -115,6 +120,29 @@ namespace ContactPro.Controllers
 
         // GET: Contacts/Create
         [Authorize]
+        public async Task<IActionResult> EmailContact(int id)
+        {
+            string appUserId = _userManager.GetUserId(User);
+            Contact contact = await _context.Contacts.Where(c => c.Id == d && c.AppUserID == appUserId)
+                                                     .FirstOrDefaultAsync();
+            if (contact == null)
+            {
+                return NotFound();
+            }
+            EmailData emailData = new EmailData()
+            {
+                EmailAddress = contact.Email,
+                FirstName = contact.FirstName,
+                LastName = contact.LastName
+
+            };
+            EmailContactViewModel model = new EmailContactViewModel()
+            {
+                Contact = contact,
+                EmailData = emailData
+            };
+            return View(model);
+        }
         public async Task<IActionResult> Create()
         {
             string appUserId = _userManager.GetUserId(User);
