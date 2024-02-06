@@ -18,7 +18,7 @@
 				<div class="square-img-container">
 					@if (Model.ImageData != null)
 					{
-						<img id="contactImage" class="square-img" src="@ImageService.ConvertByteArrayToFile(Model.ImageData, Model.ImageType)"/>
+						<img id="contactImage" class="square-img" src="@ImageService.ConvertByteArrayToFile(Model.ImageData, Model.ImageType!)"/>
 					}else
 					{
 						<img id="contactImage" class="square-img" src="~/img/DefaultContactImage.png">
