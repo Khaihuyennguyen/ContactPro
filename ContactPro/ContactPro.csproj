@@ -45,4 +45,11 @@
     <None Include="wwwroot\img\ProfilePicWS.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\img\oops.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

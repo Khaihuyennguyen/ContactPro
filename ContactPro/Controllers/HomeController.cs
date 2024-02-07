@@ -22,7 +22,24 @@ namespace ContactPro.Controllers
         {
             return View();
         }
+        [Route("/Home/HandleError/{code:int}")]
+        public IActionResult HandleError(int code)
+        {
+            var customError = new CustomError();
+            customError.code = code;
 
+            if (code == 404) 
+            {
+                customError.message = "The page you are trying to reach does not exits.";
+
+            } 
+            else 
+            {
+                customError.message = "Hmm, nothing to see here";
+            }
+
+            return View("~/Views/Shared/CustomError.cshtml", customError);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
