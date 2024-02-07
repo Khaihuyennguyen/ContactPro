@@ -9,24 +9,34 @@ using ContactPro.Data;
 using ContactPro.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using ContactPro.Models.ViewModels;
 
 namespace ContactPro.Controllers
 {
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public CategoriesController(ApplicationDbContext context)
+
+        public CategoriesController(ApplicationDbContext context, UserManager<AppUser> userManager            )
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Categories
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Categories.Include(c => c.AppUser);
-            return View(await applicationDbContext.ToListAsync());
+
+            string appUserId = _userManager.GetUserId(User);
+
+
+            var catagories = await _context.Categories.Where(c => c.AppUserId ==appUserId)
+                                                .Include(c => c.AppUser)
+                                                .ToListAsync();      
+            return View( catagories);
         }
 
         // GET: Categories/Details/5
@@ -78,17 +88,21 @@ namespace ContactPro.Controllers
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null )
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories.FindAsync(id);
+            string appUserId = _userManager.GetUserId(User);
+
+
+            var category = await _context.Categories.Where(c => c.Id == id && c.AppUserId == appUserId)
+                                                    .FirstOrDefaultAsync();
             if (category == null)
             {
                 return NotFound();
             }
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", category.AppUserId);
+            
             return View(category);
         }
 
@@ -108,6 +122,8 @@ namespace ContactPro.Controllers
             {
                 try
                 {
+                    string appUserId = _userManager.GetUserId(User);
+                    category.AppUserId = appUserId;
                     _context.Update(category);
                     await _context.SaveChangesAsync();
                 }
@@ -124,7 +140,7 @@ namespace ContactPro.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", category.AppUserId);
+            //ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", category.AppUserId);
             return View(category);
         }
 
