@@ -1,14 +1,14 @@
 :root {
     --cf-primaryColor: #0869b8;
-    --cf-primaryColorDark: #002a4e;
+    --cf-primaryColorDark: #205A8C;
     --cf-primaryColorLight: #edf5fc;
     --cf-secondaryColor: #fff0d9;
     --cf-secondaryColorLight: #FFF8EC;
     --cf-dark-color: #131313;
     --cf-light-gray: #d9d9d9;
     --cf-light-color: #eeeeee;
-    --cf-title-font: 'Fira Sans', sans-serif;
-    --cf-body-font: 'Roboto', sans-serif;
+    --cf-title-font: 'Helvetica', sans-serif;
+    --cf-body-font: 'Helvetica', sans-serif;
 }
 
 html,
@@ -18,7 +18,7 @@ body {
 
 body {
     /* fallback for old browsers */
-    background-color: var(--cf-primaryColorLight);
+    background-color: var(--cf-secondaryColor);
     display: flex;
     flex-direction: column;
     color: var(--cf-dark-color);
@@ -63,7 +63,7 @@ body {
 }
 
 nav {
-    background-color: var(--cf-primaryColorLight)
+    background-color: var(--cf-secondaryColor)
 }
 
 h1,
@@ -79,7 +79,7 @@ h6 {
 
 
 main {
-    background-color: var(--cf-primaryColorLight);
+    background-color: var(--cf-secondaryColor);
 }
 
 .content {
